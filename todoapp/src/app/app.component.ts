@@ -15,11 +15,18 @@ export interface Task{
 })
 export class AppComponent {
 
-task:string="";
+newTask:string="";
 completed:boolean=false;
-
+todoList:Task[]=[];
 addTask(){
-
+  console.log("buttopn");
+if(this.newTask.trim()!=="")
+{
+  console.log("no task");
+  this.todoList.push({id:Math.floor(Math.random()*100+1),task:this.newTask,completed:false});
+}
+console.log(this.todoList);
+this.newTask="";
 }
 
 }
