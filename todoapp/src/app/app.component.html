@@ -1,5 +1,16 @@
 <div class="bg-black text-white text-center p-5">
   <input placeholder="please fill the task" [(ngModel)]="newTask" class="border-1 border-gray-600 rounded-xs" />
   <button class="bg-lime-600 size-7 rounded-xs" (click)="addTask()">+</button>
+  <div class="bg-black text-white border-1 border-lime-700 w-md text-center justify-self-center m-5 p-5 ">
+    <ul *ngFor="let item of todoList,let i=index" >
+      <li class="flex flex-row">
+        <input type="checkbox"  (change)="completeTask(i)" />
+        <input ngClass="{{ item.completed?'line-through':'' }}" type="text" value="{{ item.task }}" disabled="{{ item.id===editId }}"/>
+        <button  class="ml-6" (click)="editTask(item.id)">Edit</button>
+        <button (click)="deleteTask(item.id)" class="ml-6">Delete</button>
+      </li>
+    </ul>
+  </div>
 </div>
+
 <router-outlet></router-outlet>
