@@ -1,15 +1,21 @@
-<div class="bg-black text-white text-center p-5">
-  <input placeholder="please fill the task" [(ngModel)]="newTask" class="border-1 border-gray-600 rounded-xs" />
-  <button class="bg-lime-600 size-7 rounded-xs" (click)="addTask()">+</button>
-  <div class="bg-black text-white border-1 border-lime-700 w-md text-center justify-self-center m-5 p-5 ">
-    <ul *ngFor="let item of todoList,let i=index" >
-      <li class="flex flex-row">
-        <input type="checkbox"  (change)="completeTask(i)" />
-        <input ngClass="{{ item.completed?'line-through':'' }}" type="text" value="{{ item.task }}" disabled="{{ item.id===editId }}"/>
-        <button  class="ml-6" (click)="editTask(item.id)">Edit</button>
-        <button (click)="deleteTask(item.id)" class="ml-6">Delete</button>
-      </li>
-    </ul>
+<div class='bg-black text-white justify-self-center  border-lime-600 border-2 rounded-md p-20 m-10'>
+  <app-header></app-header>
+  <div class="bg-black text-white text-center p-5">
+    <input placeholder="What needs to be done" [(ngModel)]="newTask" class="bg-gray-700 p-3  w-sm rounded-sm" />
+   <p class="text-red-800" *ngIf="error">Please fill the field</p>
+    <button class="bg-lime-500 size-10 font-bold rounded-sm m-2" (click)="addTask()">+</button>
+    <div class=" p-5 ">
+      <ul *ngFor="let item of todoList,let i=index" >
+        <li class="border-1 border-gray-700 rounded-sm p-4 m-2 w-md flex flex-row">
+          <input type="checkbox" (change)="completeTask(i)" class="size-5 justify-start m-2" />
+          <input [ngClass]="item.completed?'line-through':''" type="text" [value]="item.task"
+            class="text-white border-1 border-gray-600 rounded-sm p-2" [disabled]="item.id!==editId" #taskInputValue />
+          <button class="border-1 border-amber-500 rounded-md m-2" (click)="editTask(item.id)" [hidden]="!editButtonvisibility">Edit</button>
+          <button class="border-1 border-amber-500 rounded-md m-2" (click)="saveTask(i,taskInputValue)" [hidden]="editButtonvisibility">Save</button>
+          <button class="border-1 border-amber-500 rounded-md m-2" (click)="deleteTask(item.id)" >Delete</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

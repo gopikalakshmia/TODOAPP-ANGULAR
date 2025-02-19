@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { HeaderComponent } from '../Components/header/header/header.component';
 export interface Task{
   id:number;
   task:string;
@@ -10,7 +11,7 @@ export interface Task{
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,FormsModule,NgFor,NgClass],
+  imports: [RouterOutlet,FormsModule,NgFor,NgClass,HeaderComponent,NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -20,27 +21,41 @@ newTask:string="";
 completed:boolean=false;
 todoList:Task[]=[];
 editId:number=0;
+editedTaskValue:string='';
+error:boolean=false;
+editButtonvisibility:boolean=true;
+
+
+
 addTask(){
-  console.log("buttopn");
 if(this.newTask.trim()!=="")
 {
-  console.log("no task");
   this.todoList.push({id:Math.floor(Math.random()*100+1),task:this.newTask,completed:false});
 }
-console.log(this.todoList);
+else{
+this.error=true;
+}
 this.newTask="";
 }
 
 completeTask(index:number){
  this.todoList[index].completed=!this.todoList[index].completed;
- console.log(this.todoList[index])
 }
 
 deleteTask(id:number){
 this.todoList=this.todoList.filter((item)=>item.id!==id);
 }
 editTask(editId:number){
-  console.log("edit task");
   this.editId=editId;
+  this.editButtonvisibility=false;
+}
+
+saveTask(index:number,editedTaskinput:HTMLInputElement){
+ if(editedTaskinput.value.trim()!=='')
+ {
+  this.todoList[index].task=editedTaskinput.value;
+  this.editId=0;
+  this.editButtonvisibility=true;
+ }
 }
 }
