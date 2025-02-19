@@ -8,8 +8,8 @@
       <ul *ngFor="let item of todoList,let i=index" >
         <li class="border-1 border-gray-700 rounded-sm p-4 m-2 w-md flex flex-row">
           <input type="checkbox" (change)="completeTask(i)" class="size-5 justify-start m-2" />
-          <input [ngClass]="item.completed?'line-through':''" type="text" [value]="item.task"
-            class="text-white border-1 border-gray-600 rounded-sm p-2" [disabled]="item.id!==editId" #taskInputValue />
+          <input [ngClass]="item.completed?'line-through':''" type="text" [value]="item.task" [ngClass]="editButtonvisibility?'border-0':'border-1 border-gray-600 rounded-sm '"
+            class="text-white p-2" [disabled]="item.id!==editId" #taskInputValue />
           <button class="border-1 border-amber-500 rounded-md m-2" (click)="editTask(item.id)" [hidden]="!editButtonvisibility">Edit</button>
           <button class="border-1 border-amber-500 rounded-md m-2" (click)="saveTask(i,taskInputValue)" [hidden]="editButtonvisibility">Save</button>
           <button class="border-1 border-amber-500 rounded-md m-2" (click)="deleteTask(item.id)" >Delete</button>

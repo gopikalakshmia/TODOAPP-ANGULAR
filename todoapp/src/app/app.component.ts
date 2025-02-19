@@ -31,6 +31,7 @@ addTask(){
 if(this.newTask.trim()!=="")
 {
   this.todoList.push({id:Math.floor(Math.random()*100+1),task:this.newTask,completed:false});
+  this.error=false;
 }
 else{
 this.error=true;
