@@ -4,9 +4,14 @@
     <app-task (newTodoVal)="addTask($event)"></app-task>
     <div class=" p-5 ">
       <ul >
-        <app-todo-list-display  *ngFor="let item of todoList,let i=index" [todoTask]="item" [indexTask]="i" [todoList]="todoList" (todoListUpdated)="updateTodoList($event)"></app-todo-list-display>
+        <app-todo-list-display  *ngFor="let item of filteredtodoList,let i=index" [todoTask]="item" [indexTask]="i" [todoList]="filteredtodoList" (todoListUpdated)="updateTodoList($event)"></app-todo-list-display>
       </ul>
     </div>
+  </div>
+  <div class="text-white mt-5 border-1 border-lime-800 text-center">
+    <button class="p-2" (click)="filteringTodolist('All')">All</button>
+    <button class="p-2" (click)="filteringTodolist('Active')">Active</button>
+    <button class="p-2" (click)="filteringTodolist('Completed')">Completed</button>
   </div>
 </div>
 

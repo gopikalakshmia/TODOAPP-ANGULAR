@@ -17,11 +17,28 @@ import { TodoListDisplayComponent } from '../Components/taskDisplay/todo-list-di
 export class AppComponent {
 
   todoList:Task[]=[];
+  filteredtodoList:Task[]=[]
 addTask(newTask:string){
   this.todoList.push({id:Math.floor(Math.random()*100+1),task:newTask,completed:false});
+  this.filteredtodoList=this.todoList;
 }
 
 updateTodoList(updatedTodoList:Task[]){
   this.todoList=updatedTodoList;
+  this.filteredtodoList=this.todoList;
 }
+
+filteringTodolist(identifier:string){
+if(identifier==='All'){
+this.filteredtodoList=this.todoList;
+}
+else if(identifier==='Completed'){
+  this.filteredtodoList=this.todoList.filter((item)=>item.completed===true);
+  }
+  else if(identifier==='Active'){
+    this.filteredtodoList=this.todoList.filter((item)=>item.completed===false);
+    }
+    console.log(this.filteredtodoList);
+}
+
 }
