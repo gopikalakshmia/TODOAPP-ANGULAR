@@ -1,2 +1,2 @@
 # TODOAPP-ANGULAR
-creating a todo app with Angular framework!
+100 Project challenge #1-TODOApp with Angular
